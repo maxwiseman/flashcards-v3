@@ -9,7 +9,12 @@ export function ClientProviders({
   children: React.ReactNode;
 }): React.ReactElement {
   return (
-    <ThemeProvider>
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="system"
+      disableTransitionOnChange
+      enableSystem
+    >
       <SessionProvider>{children}</SessionProvider>
     </ThemeProvider>
   );
