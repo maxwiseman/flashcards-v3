@@ -1,7 +1,7 @@
 import { Separator } from "@/components/ui/separator";
-import { MenuCard } from "../components/menu-card";
-import SignIn from "../components/sign-in";
-import { NewButton } from "./new-button";
+import { MenuCard } from "../../components/menu-card";
+import SignIn from "../../components/sign-in";
+import { NewButton } from "../new-button";
 
 export default function Page(): React.ReactElement {
   return (

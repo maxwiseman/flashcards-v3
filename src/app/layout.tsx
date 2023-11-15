@@ -26,7 +26,7 @@ export default function RootLayout({
       <body className={`font-sans ${inter.variable}`}>
         <ClientProviders>
           <TRPCReactProvider cookies={cookies().toString()}>
-            <main className="p-8">{children}</main>
+            {children}
           </TRPCReactProvider>
         </ClientProviders>
       </body>

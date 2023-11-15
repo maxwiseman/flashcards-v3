@@ -1,5 +1,6 @@
 "use client";
 import { useSession, signIn, signOut } from "next-auth/react";
+import Link from "next/link";
 
 export default function SignIn(): React.ReactElement {
   const { data: session, status } = useSession();
@@ -19,9 +20,7 @@ export default function SignIn(): React.ReactElement {
   return (
     <>
       Not signed in <br />
-      <button onClick={() => signIn()} type="button">
-        Sign in
-      </button>
+      <Link href="/sign-in">Sign in</Link>
     </>
   );
 }

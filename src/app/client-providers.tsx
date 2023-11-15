@@ -1,6 +1,7 @@
 "use client";
 
 import { SessionProvider } from "next-auth/react";
+import { Toaster } from "sonner";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 
 export function ClientProviders({
@@ -15,6 +16,7 @@ export function ClientProviders({
       disableTransitionOnChange
       enableSystem
     >
+      <Toaster />
       <SessionProvider>{children}</SessionProvider>
     </ThemeProvider>
   );
