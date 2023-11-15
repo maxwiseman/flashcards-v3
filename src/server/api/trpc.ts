@@ -11,8 +11,8 @@ import { initTRPC, TRPCError } from "@trpc/server";
 import { type NextRequest } from "next/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
-
-import { getServerAuthSession } from "@/server/auth";
+import { type Prisma, type PrismaClient } from "@prisma/client";
+import { getServerAuthSession, type Session } from "@/server/auth";
 import { db } from "@/server/db";
 
 /**
@@ -37,7 +37,14 @@ interface CreateContextOptions {
  *
  * @see https://create.t3.gg/en/usage/trpc#-serverapitrpcts
  */
-export const createInnerTRPCContext = async (opts: CreateContextOptions) => {
+export const createInnerTRPCContext = async (
+  opts: CreateContextOptions,
+): Promise<{
+  session: Session | null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- This doesn't really have a type
+  headers: any;
+  db: PrismaClient<Prisma.PrismaClientOptions, never>;
+}> => {
   const session = await getServerAuthSession();
 
   return {
@@ -53,7 +60,14 @@ export const createInnerTRPCContext = async (opts: CreateContextOptions) => {
  *
  * @see https://trpc.io/docs/context
  */
-export const createTRPCContext = async (opts: { req: NextRequest }) => {
+export const createTRPCContext = async (opts: {
+  req: NextRequest;
+}): Promise<{
+  session: Session | null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Same as above
+  headers: any;
+  db: PrismaClient<Prisma.PrismaClientOptions, never>;
+}> => {
   // Fetch stuff that depends on the request
 
   return await createInnerTRPCContext({
@@ -108,7 +122,7 @@ export const publicProcedure = t.procedure;
 
 /** Reusable middleware that enforces users are logged in before running the procedure. */
 const enforceUserIsAuthed = t.middleware(({ ctx, next }) => {
-  if (!ctx.session || !ctx.session.user) {
+  if (!ctx.session?.user) {
     throw new TRPCError({ code: "UNAUTHORIZED" });
   }
   return next({

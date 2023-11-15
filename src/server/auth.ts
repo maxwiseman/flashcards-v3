@@ -5,7 +5,6 @@ import {
   type NextAuthOptions,
 } from "next-auth";
 import DiscordProvider from "next-auth/providers/discord";
-
 import { env } from "@/env.mjs";
 import { db } from "@/server/db";
 
@@ -15,15 +14,14 @@ import { db } from "@/server/db";
  *
  * @see https://next-auth.js.org/getting-started/typescript#module-augmentation
  */
+export interface Session extends DefaultSession {
+  user: {
+    id: string;
+    // ...other properties
+    // role: UserRole;
+  } & DefaultSession["user"];
+}
 declare module "next-auth" {
-  interface Session extends DefaultSession {
-    user: {
-      id: string;
-      // ...other properties
-      // role: UserRole;
-    } & DefaultSession["user"];
-  }
-
   // interface User {
   //   // ...other properties
   //   // role: UserRole;
@@ -68,4 +66,5 @@ export const authOptions: NextAuthOptions = {
  *
  * @see https://next-auth.js.org/configuration/nextjs
  */
-export const getServerAuthSession = () => getServerSession(authOptions);
+export const getServerAuthSession = async (): Promise<Session | null> =>
+  getServerSession(authOptions);

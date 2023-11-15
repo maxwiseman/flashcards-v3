@@ -1,10 +1,10 @@
 import {
   createTRPCProxyClient,
   loggerLink,
+  // eslint-disable-next-line camelcase -- This is in camelcase
   unstable_httpBatchStreamLink,
 } from "@trpc/client";
 import { cookies } from "next/headers";
-
 import { type AppRouter } from "@/server/api/root";
 import { getUrl, transformer } from "./shared";
 

@@ -37,7 +37,8 @@ const config = {
         checksVoidReturn: { attributes: false },
       },
     ],
-    "no-console": ["warn", { allow: ["warn", "error"] }]
+    "no-console": ["warn", { allow: ["warn", "error"] }],
+    "no-return-await": "off"
   },
 };
 
