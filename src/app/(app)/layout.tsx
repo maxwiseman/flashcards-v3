@@ -1,3 +1,5 @@
+import { Navbar } from "@/components/navbar";
+import "@/styles/globals.css";
 
 export const metadata = {
   title: "Flashcards",
@@ -12,6 +14,7 @@ export default function RootLayout({
 }): React.ReactElement {
   return (
     <>
+      <Navbar />
       <main className="p-8">{children}</main>
     </>
   );
