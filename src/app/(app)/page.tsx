@@ -18,6 +18,9 @@ export default function Page(): React.ReactElement {
         <MenuCard />
         <MenuCard />
         <MenuCard />
+        <MenuCard />
+        <MenuCard />
+        <MenuCard />
       </div>
       <SignIn />
     </>

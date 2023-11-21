@@ -45,7 +45,7 @@ export default function Page({
           })}
         </div>
         <Button
-          className="absolute left-4 top-1/2 translate-y-[-50%]"
+          className="absolute left-4 top-1/2 translate-y-[-50%] bg-background"
           onClick={() => {
             // @ts-expect-error -- This should be fine
             // eslint-disable-next-line @typescript-eslint/no-unsafe-call -- This is ok
@@ -57,7 +57,7 @@ export default function Page({
           <ArrowLeft className="h-4 w-4" />
         </Button>
         <Button
-          className="absolute right-4 top-1/2 translate-y-[-50%]"
+          className="absolute right-4 top-1/2 translate-y-[-50%] bg-background"
           onClick={() => {
             // @ts-expect-error -- This should be fine
             // eslint-disable-next-line @typescript-eslint/no-unsafe-call -- This is ok
